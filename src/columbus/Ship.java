@@ -11,13 +11,11 @@ public class Ship extends Observable {
 	protected Image img = new Image("file:src/columbus/ship.png", 50, 50, true, true);
 	protected ImageView imgv = new ImageView(img);
 	protected int scale;
-	protected Map map;
 	
 	/** A constructor.
 	 * @param map - the map this ship will navigate.
 	 */
-	public Ship(Map map) {
-		this.map = map;
+	public Ship() {
 		location = new Point(1, 1);
 	}
 	
@@ -43,7 +41,7 @@ public class Ship extends Observable {
 	 * @param p - the point to move to.
 	 */
 	public void moveTo(Point p) {
-		if(p.x >= 0 && p.x <= 9 && p.y >= 0 && p.y <= 9 && map.getGrid()[p.x][p.y] == 0) {
+		if(p.x >= 0 && p.x <= 9 && p.y >= 0 && p.y <= 9 && Map.getGrid()[p.x][p.y] == 0) {
 			location = p;
 			imgv.setX(location.x * scale);
 			imgv.setY(location.y * scale);

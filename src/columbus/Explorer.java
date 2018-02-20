@@ -19,10 +19,9 @@ public class Explorer extends Application {
 	private final int dimension = 10; // Number of cells in the grid.
 	private final int scale = 50; // Size of each cell.
 	private Pane root; // The pane this application will run in.
-	private final Map map = Map.getInstance(); // The map.
-	private Ship columbus = new Ship(map); // Columbus' ship.
+	//private final Map map = Map.getInstance(); // The map.
+	private Ship columbus = new Ship(); // Columbus' ship.
 	private List<PirateShip> pirates; // The pirate ships.
-	//int[][] grid = map.getMap(); // Our grid.
 
 	/**
 	 * Overrides the start method to: -Set up the window. -Draw all the game
@@ -99,18 +98,18 @@ public class Explorer extends Application {
 	 * Draws the map.
 	 */
 	private void drawMap() {
-		map.makeAll();
+		Map.getInstance().makeAll();
 		pirates = new ArrayList<PirateShip>();
 		for (int x = 0; x < dimension; x++) {
 			for (int y = 0; y < dimension; y++) {
 				Rectangle rect = new Rectangle(x * scale, y * scale, scale, scale);
 				rect.setStroke(Color.BLACK); // We want the black outline
-				if (map.getGrid()[x][y] == 1)
+				if (Map.getGrid()[x][y] == 1)
 					rect.setFill(Color.GREEN); // If the cell contains 1, it's an island.
 				else
 					rect.setFill(Color.PALETURQUOISE); // Else, it's water.
-				if (map.getGrid()[x][y] == 2) { // If the cell contains 2, give it a pirate.
-					PirateShip p = new PirateShip(map, columbus);
+				if (Map.getGrid()[x][y] == 2) { // If the cell contains 2, give it a pirate.
+					PirateShip p = new PirateShip(columbus);
 					p.moveTo(new Point(x, y));
 					pirates.add(p);
 				}
