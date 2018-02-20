@@ -29,7 +29,7 @@ public class PirateShip extends Ship implements Observer{
 	@Override
 	public void moveTo(Point p) {
 		System.out.println("MoveTo called on pair: " + p.toString());
-		if(p.x >= 0 && p.x <= 9 && p.y >= 0 && p.y <= 9 && this.map.getMap()[p.x][p.y] % 2 == 0) {	//Pirate ships are allowed to "pass" each other.
+		if(p.x >= 0 && p.x <= 9 && p.y >= 0 && p.y <= 9 && this.map.getGrid()[p.x][p.y] % 2 == 0) {	//Pirate ships are allowed to "pass" each other.
 			System.out.println("Moving ship to: " + p.toString());
 			map.set(location.x, location.y, 0);	//Set the current location to be empty.
 			location = p;						

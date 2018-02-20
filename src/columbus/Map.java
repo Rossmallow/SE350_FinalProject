@@ -3,23 +3,39 @@ package columbus;
 import java.util.*;
 
 public class Map {
-	public int[][] map; 
 	
-	/** Creates a new blank map.
-	 *  @return - The new blank map
+	private static int[][] grid;
+	public static final int SIZE = 50;
+	private static Map instance;
+	
+	/** Returns a singleton instance of a Map.
+	 *  @return - the Map object.
 	 */
-	public int[][] getMap() {
-		return map;
+	public static Map getInstance() {
+		if(instance == null) {
+			instance = new Map();
+		}
+		return instance;
+	}
+	
+	/** Returns this map's grid.
+	 *  @return - the grid.
+	 */
+	public static int[][] getGrid() {
+		if(instance == null) {
+			instance = new Map();
+		}
+		return grid;
 	}
 
 	/** Constructor - creates a square map of a specified size.
 	 *  @param size - the length of one side of the map.
 	 */
-	public Map(int size) {
-		map = new int[size][size];
-		for(int y = 0; y < size; y++) {
-			for(int x = 0; x < size; x++) {
-				map[x][y] = 0;
+	private Map() {
+		grid = new int[SIZE][SIZE];
+		for(int y = 0; y < SIZE; y++) {
+			for(int x = 0; x < SIZE; x++) {
+				grid[x][y] = 0;
 			}
 		}
 	}
@@ -30,7 +46,7 @@ public class Map {
 	 * @param val - the value to set the cell to.
 	 */
 	public void set(int x, int y, int val) {
-		map[x][y] = val;
+		grid[x][y] = val;
 	}
 	
 	/** Makes islands and pirates on the map.
@@ -52,7 +68,7 @@ public class Map {
 	public void makePirates(int n) {
 		Random rand = new Random(System.currentTimeMillis());
 		for (int i = 0; i < n; i++) {
-			map[rand.nextInt(10)][rand.nextInt(10)] = 2;
+			grid[rand.nextInt(10)][rand.nextInt(10)] = 2;
 		}
 	}
 	
@@ -68,7 +84,7 @@ public class Map {
 	public void makeIslands(int n) {
 		Random rand = new Random();
 		for (int i = 0; i < n; i++) {
-			map[rand.nextInt(10)][rand.nextInt(10)] = 1;
+			grid[rand.nextInt(10)][rand.nextInt(10)] = 1;
 		}
 	}
 }
