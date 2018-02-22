@@ -19,7 +19,6 @@ public class Explorer extends Application {
 	private final int dimension = 10; // Number of cells in the grid.
 	private final int scale = 50; // Size of each cell.
 	private Pane root; // The pane this application will run in.
-	//private final Map map = Map.getInstance(); // The map.
 	private Ship columbus = new Ship(); // Columbus' ship.
 	private List<PirateShip> pirates; // The pirate ships.
 

@@ -9,6 +9,7 @@ import javafx.scene.image.ImageView;
 public class PirateShip extends Ship implements Observer{
 	
 	private Ship toObserve; //The ship this pirate will follow.
+	private PirateStrategy strat = new FollowStrategy(this); //The strategy this ship is using.
 	
 	/** A constructor.
 	 * 
@@ -39,24 +40,6 @@ public class PirateShip extends Ship implements Observer{
 		}
 	}
 	
-	/** Moves one space closer to the ship passed as an argument.
-	 * @param s - the ship to follow.
-	 */
-	public void follow(Ship s) {
-		System.out.println("Calling follow.");
-		Point p = s.getLocation();
-		Point q = this.getLocation();
-		if (p.x > q.x) {
-			this.goEast();
-		} else if (p.x < q.x) {
-			this.goWest();
-		} else if (p.y > q.y) {
-			this.goSouth();
-		} else if (p.y < q.y) {
-			this.goNorth();
-		}
-	}
-	
 	/** The overridden update method.
 	 * @param o
 	 * @param arg
@@ -64,7 +47,7 @@ public class PirateShip extends Ship implements Observer{
 	@Override
 	public void update(Observable o, Object arg) {
 		if(o == toObserve) {
-			this.follow(toObserve);
+			strat.chase(toObserve);
 		}
 	}
 	
