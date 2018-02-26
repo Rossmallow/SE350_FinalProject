@@ -9,8 +9,7 @@ public class VerticalStrategy implements PirateStrategy {
 	/**
 	 * A constructor.
 	 * 
-	 * @param s
-	 *            - the ship this strategy is assigned to.
+	 * @param s - the ship this strategy is assigned to.
 	 */
 	public VerticalStrategy(PirateShip s) {
 		this.pirate = s;
