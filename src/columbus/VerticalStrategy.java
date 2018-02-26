@@ -7,7 +7,7 @@ public class VerticalStrategy implements PirateStrategy {
 	private PirateShip pirate;
 
 	/**
-	 * A constructor.
+	 * A constructor. 
 	 * 
 	 * @param s - the ship this strategy is assigned to.
 	 */
