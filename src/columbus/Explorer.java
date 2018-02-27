@@ -17,7 +17,7 @@ import javafx.stage.*;
 public class Explorer extends Application {
 
 	private final int dimension = 10; // Number of cells in the grid.
-	private final int scale = 50; // Size of each cell.
+	//private final int scale = 50; // Size of each cell.
 	private Pane root; // The pane this application will run in.
 	private Ship columbus = new Ship(); // Columbus' ship.
 	private List<PirateShip> pirates; // The pirate ships.
@@ -77,7 +77,7 @@ public class Explorer extends Application {
 	 *            - The ship to display.
 	 */
 	private void showShip(Ship s) {
-		ImageView i = s.getImg(scale);
+		ImageView i = s.getImg(Map.SCALE);
 		if (!root.getChildren().contains(i)) {
 			root.getChildren().add(i);
 		}
@@ -101,7 +101,7 @@ public class Explorer extends Application {
 		pirates = new ArrayList<PirateShip>();
 		for (int x = 0; x < dimension; x++) {
 			for (int y = 0; y < dimension; y++) {
-				Rectangle rect = new Rectangle(x * scale, y * scale, scale, scale);
+				Rectangle rect = new Rectangle(x * Map.SCALE, y * Map.SCALE, Map.SCALE, Map.SCALE);
 				rect.setStroke(Color.BLACK); // We want the black outline
 				if (Map.getGrid()[x][y] == 1)
 					rect.setFill(Color.GREEN); // If the cell contains 1, it's an island.

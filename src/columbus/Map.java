@@ -6,6 +6,7 @@ public class Map {
 	
 	private static int[][] grid;
 	public static final int SIZE = 50;
+	public static final int SCALE = 25;
 	private static Map instance;
 	
 	/** Returns a singleton instance of a Map.
