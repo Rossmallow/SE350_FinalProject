@@ -114,6 +114,12 @@ public class Ship extends Observable {
 		return "Ship at " + location.toString();
 	}
 
+	/**
+	 * Checks whether or not location is null
+	 * @param x
+	 * @param y
+	 * @return
+	 */
 	public boolean check(int x, int y) {
 		return location != null;
 	}
