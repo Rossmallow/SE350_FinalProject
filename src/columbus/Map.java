@@ -5,8 +5,8 @@ import java.util.*;
 public class Map {
 	
 	private static int[][] grid;
-	public static final int SIZE = 50;
-	public static final int SCALE = 25;
+	public static final int SIZE = 15;
+	public static final int SCALE = 30;
 	private static Map instance;
 	
 	/** Returns a singleton instance of a Map.
@@ -73,10 +73,10 @@ public class Map {
 		}
 	}
 	
-	/** Makes 10 islands.
+	/** Makes SIZE islands.
 	 */
 	public void makeIslands() {
-		makeIslands(10);
+		makeIslands(SIZE);
 	}
 
 	/** Makes a specified number of islands.
@@ -85,7 +85,7 @@ public class Map {
 	public void makeIslands(int n) {
 		Random rand = new Random();
 		for (int i = 0; i < n; i++) {
-			grid[rand.nextInt(10)][rand.nextInt(10)] = 1;
+			grid[rand.nextInt(SIZE)][rand.nextInt(SIZE)] = 1;
 		}
 	}
 }

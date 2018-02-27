@@ -16,8 +16,6 @@ import javafx.stage.*;
 
 public class Explorer extends Application {
 
-	private final int dimension = 10; // Number of cells in the grid.
-	//private final int scale = 50; // Size of each cell.
 	private Pane root; // The pane this application will run in.
 	private Ship columbus = new Ship(); // Columbus' ship.
 	private List<PirateShip> pirates; // The pirate ships.
@@ -29,7 +27,7 @@ public class Explorer extends Application {
 	@Override
 	public void start(Stage stage) throws Exception {
 		root = new AnchorPane();
-		Scene scene = new Scene(root, 500, 500);
+		Scene scene = new Scene(root, Map.SCALE * Map.SIZE, Map.SCALE * Map.SIZE);
 		stage.setScene(scene);
 		stage.setTitle("Columbus Game");
 		drawMap();
@@ -99,8 +97,8 @@ public class Explorer extends Application {
 	private void drawMap() {
 		Map.getInstance().makeAll();
 		pirates = new ArrayList<PirateShip>();
-		for (int x = 0; x < dimension; x++) {
-			for (int y = 0; y < dimension; y++) {
+		for (int x = 0; x < Map.SIZE; x++) {
+			for (int y = 0; y < Map.SIZE; y++) {
 				Rectangle rect = new Rectangle(x * Map.SCALE, y * Map.SCALE, Map.SCALE, Map.SCALE);
 				rect.setStroke(Color.BLACK); // We want the black outline
 				if (Map.getGrid()[x][y] == 1)

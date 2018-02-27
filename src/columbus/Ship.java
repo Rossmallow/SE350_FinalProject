@@ -8,9 +8,10 @@ import javafx.scene.image.Image;
 public class Ship extends Observable {
 
 	protected Point location;
-	protected Image img = new Image("file:src/columbus/ship.png", 50, 50, true, true);
+	protected Image img = new Image("file:src/columbus/ship.png", Map.SCALE, Map.SCALE, true, true);
 	protected ImageView imgv = new ImageView(img);
 	protected int scale;
+	public final int BOUND = Map.SIZE - 1;
 
 	/**
 	 * A constructor.
@@ -52,7 +53,7 @@ public class Ship extends Observable {
 	 *            - the point to move to.
 	 */
 	public void moveTo(Point p) {
-		if (p.x >= 0 && p.x <= 9 && p.y >= 0 && p.y <= 9 && Map.getGrid()[p.x][p.y] == 0) {
+		if (p.x >= 0 && p.x <= BOUND && p.y >= 0 && p.y <= BOUND && Map.getGrid()[p.x][p.y] == 0) {
 			location = p;
 			imgv.setX(location.x * scale);
 			imgv.setY(location.y * scale);
@@ -65,7 +66,7 @@ public class Ship extends Observable {
 	 * Moves 1 space East, if possible.
 	 */
 	public void goEast() {
-		if (location.getX() < 9) {
+		if (location.getX() < BOUND) {
 			int x = ((int) location.getX()) + 1;
 			int y = ((int) location.getY());
 			moveTo(new Point(x, y));
@@ -98,7 +99,7 @@ public class Ship extends Observable {
 	 * Moves 1 space South, if possible.
 	 */
 	public void goSouth() {
-		if (location.getY() < 9) {
+		if (location.getY() < BOUND) {
 			int x = ((int) location.getX());
 			int y = ((int) location.getY()) + 1;
 			moveTo(new Point(x, y));
