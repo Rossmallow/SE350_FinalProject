@@ -20,8 +20,7 @@ public class VerticalStrategy implements PirateStrategy {
 	 * performed by checking for the ship in each vertical row of the grid, and then
 	 * swimming one space closer to Ship s.
 	 * 
-	 * @param s
-	 *            - the ship to chase.
+	 * @param s - the ship to chase.
 	 */
 
 	@Override

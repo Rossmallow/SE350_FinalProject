@@ -20,7 +20,7 @@ public class HorizontalStrategy implements PirateStrategy {
 	 * performed by checking for the ship in each horizontal row of the grid, and then
 	 * swimming one space closer to Ship s.
 	 * 
-	 * @param s - the ship to chase.
+	 * @param s - the ship to chase. 
 	 */
 
 	@Override
