@@ -17,7 +17,7 @@ public class PirateShip extends Ship implements Observer{
 	 */
 	public PirateShip(Ship toObserve) {
 		super();
-		this.img = new Image("file:src/columbus/pirateShip.png", 50, 50, true, true);
+		this.img = new Image("file:src/columbus/pirateShip.png", Map.SCALE, Map.SCALE, true, true);
 		this.imgv = new ImageView(img);
 		System.out.println("Set toObserve to: " + toObserve.toString());
 		this.toObserve = toObserve;
