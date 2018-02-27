@@ -5,7 +5,7 @@ import java.util.*;
 public class Map {
 	
 	private static int[][] grid;
-	public static final int SIZE = 15;
+	public static final int SIZE = 20;
 	public static final int SCALE = 30;
 	private static Map instance;
 	
@@ -73,10 +73,10 @@ public class Map {
 		}
 	}
 	
-	/** Makes SIZE islands.
+	/** Makes (SIZE^2)/10 islands.
 	 */
 	public void makeIslands() {
-		makeIslands(SIZE);
+		makeIslands(SIZE * SIZE / 10);
 	}
 
 	/** Makes a specified number of islands.
