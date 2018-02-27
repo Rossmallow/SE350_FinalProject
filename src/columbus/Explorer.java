@@ -14,7 +14,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.*;
 
-public class Explorer extends Application { 
+public class Explorer extends Application {  
 
 	private Pane root; // The pane this application will run in.
 	private Ship columbus = new Ship(); // Columbus' ship.
