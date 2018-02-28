@@ -34,6 +34,10 @@ public class Map {
 	 */
 	private Map() {
 		grid = new int[SIZE][SIZE];
+	}
+	
+	//DAVID - Initializing the Map - For reset purpose
+	public void initMap(){
 		for(int y = 0; y < SIZE; y++) {
 			for(int x = 0; x < SIZE; x++) {
 				grid[x][y] = 0;
@@ -53,8 +57,10 @@ public class Map {
 	/** Makes islands and pirates on the map.
 	 */
 	public void makeAll() {
+		initMap();
 		makeIslands();
 		makePirates();
+		makeTreasure();
 		makeCannons();
 	}
 	
@@ -90,6 +96,18 @@ public class Map {
 		}
 	}
 	
+	/* DAVID
+	 * Using 4 - to specify the Treasure
+	 * */
+	public void makeTreasure(){
+		makeTreasure(1);
+	}
+	public void makeTreasure(int n){
+		Random rand = new Random();
+		for(int i=0;i<n;i++){
+			grid[rand.nextInt(10)][rand.nextInt(10)] = 4;
+		}
+	}
 	/**
 	 * Makes 4 cannons
 	 */

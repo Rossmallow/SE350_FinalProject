@@ -3,10 +3,14 @@ package columbus;
 import java.awt.Point;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import javafx.application.*;
 import javafx.event.EventHandler;
 import javafx.scene.*;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonType;
 import javafx.scene.image.*;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
@@ -20,6 +24,7 @@ public class Explorer extends Application {
 	private Ship columbus = new UnarmedShip(); // Columbus' ship.
 	private List<PirateShip> pirates; // The pirate ships.
 	private List<Cannon> cannons; // The cannons
+	private Treasure treasure; //DAVID
 
 	/**
 	 * Overrides the start method to: -Set up the window. -Draw all the game
@@ -31,14 +36,22 @@ public class Explorer extends Application {
 		Scene scene = new Scene(root, Map.SCALE * Map.SIZE, Map.SCALE * Map.SIZE);
 		stage.setScene(scene);
 		stage.setTitle("Columbus Game");
-		drawMap();
-		showCannons();
-		showPirates();
-		showShip(columbus);
+		//DAVID - Init Game
+		initGame();		
+
 		stage.show();
 		startSailing(scene);
 	}
 
+	//DAVID -> Initializing the Game
+	public void initGame(){
+		columbus = new UnarmedShip();
+		drawMap();
+		showCannons();
+		showShip(columbus);
+		showPirates();
+		showTreasure();
+	}
 	/**
 	 * Creates an event handler that moves the ship in the right direction,
 	 * depending on which arrow key is pressed.
@@ -53,15 +66,20 @@ public class Explorer extends Application {
 				switch (ke.getCode()) {
 				case RIGHT:
 					columbus.goEast();
+					//DAVID - Init Game
+					checkGameStatus();
 					break;
 				case LEFT:
 					columbus.goWest();
+					checkGameStatus();
 					break;
 				case UP:
 					columbus.goNorth();
+					checkGameStatus();
 					break;
 				case DOWN:
 					columbus.goSouth();
+					checkGameStatus();
 					break;
 				case SPACE:
 					columbus.attack();
@@ -72,12 +90,30 @@ public class Explorer extends Application {
 			}
 		});
 	}
-
+	//DAVID - Checking Game status
+	public void checkGameStatus(){
+		//Check if Columbus won
+		if(columbus.getWinningStatus() == Ship.WON){
+			reset("Congratulations!!! You Won. Play again?");
+		} else if (columbus.getWinningStatus() == Ship.LOST) {
+			reset("Alas!!! You Lost. Play again?");
+		}
+	}
+	//DAVID - Reseting the Game
+	public void reset(String message){
+		Alert alert = new Alert(AlertType.CONFIRMATION);
+		alert.setTitle("Info");
+		alert.setContentText(message);
+		Optional<ButtonType> result = alert.showAndWait();
+		if ((result.isPresent()) && (result.get() == ButtonType.OK)) {
+			initGame();
+		}else if((result.isPresent()) && (result.get() == ButtonType.CANCEL)){
+			Platform.exit();
+		}
+	}
 	/**
 	 * Displays a ship.
-	 * 
-	 * @param s
-	 *            - The ship to display.
+	 * @param s - The ship to display.
 	 */
 	private void showShip(Ship s) {
 		ImageView i = s.getImg(Map.SCALE);
@@ -96,6 +132,16 @@ public class Explorer extends Application {
 		}
 	}
 	
+	/**
+	 * Displays Treasure
+	 * @param treasure - the treasure to display
+	 */
+	private void showTreasure(){
+		ImageView i = treasure.getImg(Map.SCALE);
+		if(!root.getChildren().contains(i))
+			root.getChildren().add(i);
+	}
+
 	/**
 	 * Displays all cannons
 	 * @param cannon - the cannon to display
@@ -132,6 +178,12 @@ public class Explorer extends Application {
 				else if (Map.getGrid()[x][y] == 3) { // If the cell contains 3, give it a cannon
 					Cannon c = new Cannon(x, y);
 					cannons.add(c);
+				}
+				//DAVID-Place treasure on Map
+				else if (Map.getGrid()[x][y] == 4) { // If the cell contains 3, give it a Treasure.
+					treasure = new Treasure(new Point(x, y));
+					//To keep track of Treasure while Columbus is on Move
+					columbus.setTreasure(treasure);
 				}
 				root.getChildren().add(rect); // Add to the node tree in the pane
 			}

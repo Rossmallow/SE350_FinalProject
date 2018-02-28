@@ -25,7 +25,8 @@ public class FollowStrategy implements PirateStrategy {
 	 */
 
 	@Override
-	public void chase(Ship s) {
+	public void chase(Ship s)
+	{
 		Point p = s.getLocation();
 		Point q = pirate.getLocation();
 		if (p.x > q.x) {
@@ -37,6 +38,8 @@ public class FollowStrategy implements PirateStrategy {
 		} else if (p.y < q.y) {
 			pirate.goNorth();
 		}
+		if(p.equals(pirate.getLocation()))
+			s.setWinningStatus(Ship.LOST);
 	}
 
 }

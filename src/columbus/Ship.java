@@ -12,6 +12,12 @@ public abstract class Ship extends Observable {
 	protected ImageView imgv = new ImageView(img);
 	protected int scale;
 	public final int BOUND = Map.SIZE - 1;
+	// DAVID
+	private Treasure treasure;
+	private String winningStatus;
+	public static String CONTINUE = "CONTINUE";
+	public static String WON = "WON";
+	public static String LOST = "LOST";
 
 	/**
 	 * A constructor.
@@ -21,6 +27,7 @@ public abstract class Ship extends Observable {
 	 */
 	public Ship() {
 		location = new Point(1, 1);
+		winningStatus = CONTINUE;
 	}
 
 	/**
@@ -46,19 +53,28 @@ public abstract class Ship extends Observable {
 		return imgv;
 	}
 
-	/**
-	 * Moves this ship to a specified point.
-	 * 
-	 * @param p
-	 *            - the point to move to.
+	//DAVID - Looking for Treasure
+	public boolean lookForTreasure(Point ship) {
+		if (ship.equals(this.getTreasure().getLocation()))
+			return true;
+		return false;
+	}
+
+	/**Moves this ship to a specified point.
+	 * @param p - the point to move to.
 	 */
 	public void moveTo(Point p) {
-		if (p.x >= 0 && p.x <= BOUND && p.y >= 0 && p.y <= BOUND && (Map.getGrid()[p.x][p.y] == 0 || Map.getGrid()[p.x][p.y] == 3)) {
+		// DAVID -> == 4-> to allow ship to overlap with treasure
+		if (p.x >= 0 && p.x <= BOUND && p.y >= 0 && p.y <= BOUND && (Map.getGrid()[p.x][p.y] == 0 || Map.getGrid()[p.x][p.y] == 3 || Map.getGrid()[p.x][p.y] == 4)) {
 			location = p;
 			imgv.setX(location.x * scale);
 			imgv.setY(location.y * scale);
 			setChanged();
-			notifyObservers();
+			if(this instanceof Ship && this.lookForTreasure(p)){
+				this.setWinningStatus(WON);
+			}else{
+				notifyObservers();
+			}
 		}
 	}
 
@@ -127,4 +143,16 @@ public abstract class Ship extends Observable {
 
 	public abstract int attack();
 	
+	public Treasure getTreasure() {
+		return treasure;
+	}
+	public void setTreasure(Treasure treasure) {
+		this.treasure = treasure;
+	}
+	public String getWinningStatus() {
+		return winningStatus;
+	}
+	public void setWinningStatus(String winningStatus) {
+		this.winningStatus = winningStatus;
+	}
 }
