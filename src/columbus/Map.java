@@ -55,6 +55,7 @@ public class Map {
 	public void makeAll() {
 		makeIslands();
 		makePirates();
+		makeCannons();
 	}
 	
 	/** Makes 2 pirates.
@@ -86,6 +87,32 @@ public class Map {
 		Random rand = new Random();
 		for (int i = 0; i < n; i++) {
 			grid[rand.nextInt(SIZE)][rand.nextInt(SIZE)] = 1;
+		}
+	}
+	
+	/**
+	 * Makes 4 cannons
+	 */
+	public void makeCannons() {
+		makeCannons(4);
+	}
+	
+	/**
+	 * Makes a n cannons
+	 * @param n - the number of cannons to make
+	 */
+	public void makeCannons(int n) {
+		Random rand = new Random(System.currentTimeMillis());
+		for (int i = 0; i < n; i++) {
+			int x = rand.nextInt(SIZE);
+			int y = rand.nextInt(SIZE);
+			if (grid[x][y] == 0) { // Creates a cannon as long as nothing is already occupying that space
+				grid[x][y] = 3;
+			}
+			else { // If something is occupying the space the cannon is being created in,
+				   // reduce i by one, to try to make another cannon
+				i--;
+			}
 		}
 	}
 }

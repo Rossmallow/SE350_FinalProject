@@ -5,7 +5,7 @@ import java.util.*;
 import javafx.scene.image.*;
 import javafx.scene.image.Image;
 
-public class Ship extends Observable {
+public abstract class Ship extends Observable {
 
 	protected Point location;
 	protected Image img = new Image("file:src/columbus/ship.png", Map.SCALE, Map.SCALE, true, true);
@@ -53,7 +53,7 @@ public class Ship extends Observable {
 	 *            - the point to move to.
 	 */
 	public void moveTo(Point p) {
-		if (p.x >= 0 && p.x <= BOUND && p.y >= 0 && p.y <= BOUND && Map.getGrid()[p.x][p.y] == 0) {
+		if (p.x >= 0 && p.x <= BOUND && p.y >= 0 && p.y <= BOUND && (Map.getGrid()[p.x][p.y] == 0 || Map.getGrid()[p.x][p.y] == 3)) {
 			location = p;
 			imgv.setX(location.x * scale);
 			imgv.setY(location.y * scale);
@@ -125,4 +125,6 @@ public class Ship extends Observable {
 		return location != null;
 	}
 
+	public abstract int attack();
+	
 }

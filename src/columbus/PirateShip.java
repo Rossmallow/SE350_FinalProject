@@ -6,7 +6,7 @@ import java.util.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
-public class PirateShip extends Ship implements Observer{
+public class PirateShip extends UnarmedShip implements Observer{
 	
 	private Ship toObserve; //The ship this pirate will follow.
 	private PirateStrategy strat = new FollowStrategy(this); //The strategy this ship is using.

@@ -17,8 +17,9 @@ import javafx.stage.*;
 public class Explorer extends Application {  
 
 	private Pane root; // The pane this application will run in.
-	private Ship columbus = new Ship(); // Columbus' ship.
+	private Ship columbus = new UnarmedShip(); // Columbus' ship.
 	private List<PirateShip> pirates; // The pirate ships.
+	private List<Cannon> cannons; // The cannons
 
 	/**
 	 * Overrides the start method to: -Set up the window. -Draw all the game
@@ -31,8 +32,9 @@ public class Explorer extends Application {
 		stage.setScene(scene);
 		stage.setTitle("Columbus Game");
 		drawMap();
-		showShip(columbus);
+		showCannons();
 		showPirates();
+		showShip(columbus);
 		stage.show();
 		startSailing(scene);
 	}
@@ -60,6 +62,9 @@ public class Explorer extends Application {
 					break;
 				case DOWN:
 					columbus.goSouth();
+					break;
+				case SPACE:
+					columbus.attack();
 					break;
 				default:
 					break;
@@ -90,6 +95,19 @@ public class Explorer extends Application {
 			showShip(p);
 		}
 	}
+	
+	/**
+	 * Displays all cannons
+	 * @param cannon - the cannon to display
+	 */
+	private void showCannons() {
+		for (Cannon cannon: cannons) {
+			ImageView i = cannon.getImg(Map.SCALE);
+			if (!root.getChildren().contains(i)) {
+				root.getChildren().add(i);
+			}
+		}
+	}
 
 	/**
 	 * Draws the map.
@@ -97,6 +115,7 @@ public class Explorer extends Application {
 	private void drawMap() {
 		Map.getInstance().makeAll();
 		pirates = new ArrayList<PirateShip>();
+		cannons = new ArrayList<Cannon>();
 		for (int x = 0; x < Map.SIZE; x++) {
 			for (int y = 0; y < Map.SIZE; y++) {
 				Rectangle rect = new Rectangle(x * Map.SCALE, y * Map.SCALE, Map.SCALE, Map.SCALE);
@@ -110,9 +129,30 @@ public class Explorer extends Application {
 					p.moveTo(new Point(x, y));
 					pirates.add(p);
 				}
+				else if (Map.getGrid()[x][y] == 3) { // If the cell contains 3, give it a cannon
+					Cannon c = new Cannon(x, y);
+					cannons.add(c);
+				}
 				root.getChildren().add(rect); // Add to the node tree in the pane
 			}
 		}
+	}
+	
+	/**
+	 * Checks to see if there are any cannons at columbus' location
+	 */
+	private boolean checkForCannons() {
+		if (Map.getGrid()[columbus.getLocation().x][columbus.getLocation().y] == 3) {
+			columbus = new ArmedShip(columbus);
+			for (Cannon cannon : cannons) {
+				if (cannon.getLocation() == columbus.getLocation()) {
+					cannons.remove(cannon);
+					root.getChildren().remove(cannon);
+				}
+			}
+			return true;
+		}
+		return false;
 	}
 
 	/**
