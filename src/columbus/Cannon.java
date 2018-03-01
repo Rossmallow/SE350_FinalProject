@@ -45,4 +45,13 @@ public class Cannon {
 	public Point getLocation() {
 		return location;
 	}
+	
+	/**
+	 * Converts this cannon to a string
+	 * 
+	 * @return - A string representation of this cannon
+	 */
+	public String toString() {
+		return "Cannon at " + location.toString();
+	}
 }

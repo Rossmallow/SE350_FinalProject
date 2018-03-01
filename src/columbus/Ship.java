@@ -12,7 +12,6 @@ public abstract class Ship extends Observable {
 	protected ImageView imgv = new ImageView(img);
 	protected int scale;
 	public final int BOUND = Map.SIZE - 1;
-	// DAVID
 	private Treasure treasure;
 	private String winningStatus;
 	public static String CONTINUE = "CONTINUE";
@@ -64,13 +63,12 @@ public abstract class Ship extends Observable {
 	 * @param p - the point to move to.
 	 */
 	public void moveTo(Point p) {
-		// DAVID -> == 4-> to allow ship to overlap with treasure
-		if (p.x >= 0 && p.x <= BOUND && p.y >= 0 && p.y <= BOUND && (Map.getGrid()[p.x][p.y] == 0 || Map.getGrid()[p.x][p.y] == 3 || Map.getGrid()[p.x][p.y] == 4)) {
+		if (p.x >= 0 && p.x <= BOUND && p.y >= 0 && p.y <= BOUND && (Map.getGrid()[p.x][p.y] != 1 && Map.getGrid()[p.x][p.y] != 2)) {
 			location = p;
 			imgv.setX(location.x * scale);
 			imgv.setY(location.y * scale);
 			setChanged();
-			if(this instanceof Ship && this.lookForTreasure(p)){
+			if(/*this instanceof Ship && this.lookForTreasure(p)*/Map.getGrid()[p.x][p.y] == 4){
 				this.setWinningStatus(WON);
 			}else{
 				notifyObservers();

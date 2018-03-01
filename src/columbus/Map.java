@@ -76,7 +76,7 @@ public class Map {
 	public void makePirates(int n) {
 		Random rand = new Random(System.currentTimeMillis());
 		for (int i = 0; i < n; i++) {
-			grid[rand.nextInt(10)][rand.nextInt(10)] = 2;
+			grid[rand.nextInt(SIZE)][rand.nextInt(SIZE)] = 2;
 		}
 	}
 	
@@ -105,7 +105,7 @@ public class Map {
 	public void makeTreasure(int n){
 		Random rand = new Random();
 		for(int i=0;i<n;i++){
-			grid[rand.nextInt(10)][rand.nextInt(10)] = 4;
+			grid[rand.nextInt(SIZE)][rand.nextInt(SIZE)] = 4;
 		}
 	}
 	/**

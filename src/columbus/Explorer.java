@@ -24,7 +24,7 @@ public class Explorer extends Application {
 	private Ship columbus = new UnarmedShip(); // Columbus' ship.
 	private List<PirateShip> pirates; // The pirate ships.
 	private List<Cannon> cannons; // The cannons
-	private Treasure treasure; //DAVID
+	private Treasure treasure; // The treasure
 
 	/**
 	 * Overrides the start method to: -Set up the window. -Draw all the game
@@ -36,21 +36,21 @@ public class Explorer extends Application {
 		Scene scene = new Scene(root, Map.SCALE * Map.SIZE, Map.SCALE * Map.SIZE);
 		stage.setScene(scene);
 		stage.setTitle("Columbus Game");
-		//DAVID - Init Game
-		initGame();		
-
+		initGame();
 		stage.show();
 		startSailing(scene);
 	}
-
-	//DAVID -> Initializing the Game
+	
+	/**
+	 * Initializes the game by drawing each element
+	 */
 	public void initGame(){
 		columbus = new UnarmedShip();
 		drawMap();
 		showCannons();
+		showTreasure();
 		showShip(columbus);
 		showPirates();
-		showTreasure();
 	}
 	/**
 	 * Creates an event handler that moves the ship in the right direction,
@@ -66,20 +66,23 @@ public class Explorer extends Application {
 				switch (ke.getCode()) {
 				case RIGHT:
 					columbus.goEast();
-					//DAVID - Init Game
 					checkGameStatus();
+//					checkForCannons();
 					break;
 				case LEFT:
 					columbus.goWest();
 					checkGameStatus();
+//					checkForCannons();
 					break;
 				case UP:
 					columbus.goNorth();
 					checkGameStatus();
+//					checkForCannons();
 					break;
 				case DOWN:
 					columbus.goSouth();
 					checkGameStatus();
+//					checkForCannons();
 					break;
 				case SPACE:
 					columbus.attack();
@@ -111,6 +114,28 @@ public class Explorer extends Application {
 			Platform.exit();
 		}
 	}
+	
+	/**
+	 * Checks to see if there are any cannons at columbus' location
+	 */
+	@SuppressWarnings("unlikely-arg-type")
+	private void checkForCannons() {
+		if (Map.getGrid()[columbus.getLocation().x][columbus.getLocation().y] == 3) {
+			columbus = new ArmedShip(columbus);
+//			Cannon cannon = cannons.get(0);
+			for (Cannon cannon : cannons) {
+				System.out.println("IN for");
+				System.out.println("Cannon: " + cannon.toString() + " Columbus: " + columbus.getLocation().toString());
+				if (cannon.getLocation() == (columbus.getLocation())) {
+					System.out.println("Removing...");
+					cannons.remove(cannon);
+					root.getChildren().remove(cannon);
+					System.out.println("Removed...");
+				}
+			}
+		}
+	}
+		
 	/**
 	 * Displays a ship.
 	 * @param s - The ship to display.
@@ -188,23 +213,6 @@ public class Explorer extends Application {
 				root.getChildren().add(rect); // Add to the node tree in the pane
 			}
 		}
-	}
-	
-	/**
-	 * Checks to see if there are any cannons at columbus' location
-	 */
-	private boolean checkForCannons() {
-		if (Map.getGrid()[columbus.getLocation().x][columbus.getLocation().y] == 3) {
-			columbus = new ArmedShip(columbus);
-			for (Cannon cannon : cannons) {
-				if (cannon.getLocation() == columbus.getLocation()) {
-					cannons.remove(cannon);
-					root.getChildren().remove(cannon);
-				}
-			}
-			return true;
-		}
-		return false;
 	}
 
 	/**
