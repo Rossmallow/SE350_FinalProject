@@ -76,7 +76,12 @@ public class Map {
 	public void makePirates(int n) {
 		Random rand = new Random(System.currentTimeMillis());
 		for (int i = 0; i < n; i++) {
-			grid[rand.nextInt(SIZE)][rand.nextInt(SIZE)] = 2;
+			int randX = 0, randY = 0;
+			while(randX <= 10 && randY <= 10) { // Pirates won't initially spawn in the same quadrent as columbus.
+				randX = rand.nextInt(SIZE);
+				randY = rand.nextInt(SIZE);
+			}
+			grid[randX][randY] = 2;
 		}
 	}
 	
