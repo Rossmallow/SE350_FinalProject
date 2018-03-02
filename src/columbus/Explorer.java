@@ -121,17 +121,18 @@ public class Explorer extends Application {
 	/**
 	 * Checks to see if there are any cannons at Columbus' location
 	 */
-	@SuppressWarnings("unlikely-arg-type")
 	private void checkForCannons() {
 		if (Map.getGrid()[columbus.getLocation().x][columbus.getLocation().y] == 3) {
 			columbus = new ArmedShip(columbus);
 			for (Cannon cannon : cannons) {
 				System.out.println("IN for");
 				System.out.println("Cannon: " + cannon.getLocation().toString() + " Columbus: " + columbus.getLocation().toString());
-				if (cannon.getLocation().toString().equals(columbus.getLocation().toString())) {
+				if (cannon.getLocation().equals(columbus.getLocation())) {
 					System.out.println("Removing...");
 					cannons.remove(cannon);
-					root.getChildren().remove(cannon);
+					//root.getChildren().remove(cannon);
+					//DAVID
+					root.getChildren().remove(cannon.getImg(Map.SCALE));
 					System.out.println("Removed...");
 					break;
 				}
