@@ -25,6 +25,7 @@ public class Explorer extends Application {
 	private List<PirateShip> pirates; // The pirate ships.
 	private List<Cannon> cannons; // The cannons
 	private Treasure treasure; // The treasure
+//	private Stage stage; // The stage
 
 	/**
 	 * Overrides the start method to: -Set up the window. -Draw all the game
@@ -33,6 +34,7 @@ public class Explorer extends Application {
 	@Override
 	public void start(Stage stage) throws Exception {
 		root = new AnchorPane();
+//		this.stage = stage;
 		Scene scene = new Scene(root, Map.SCALE * Map.SIZE, Map.SCALE * Map.SIZE);
 		stage.setScene(scene);
 		stage.setTitle("Columbus Game");
@@ -67,22 +69,22 @@ public class Explorer extends Application {
 				case RIGHT:
 					columbus.goEast();
 					checkGameStatus();
-//					checkForCannons();
+					checkForCannons();
 					break;
 				case LEFT:
 					columbus.goWest();
 					checkGameStatus();
-//					checkForCannons();
+					checkForCannons();
 					break;
 				case UP:
 					columbus.goNorth();
 					checkGameStatus();
-//					checkForCannons();
+					checkForCannons();
 					break;
 				case DOWN:
 					columbus.goSouth();
 					checkGameStatus();
-//					checkForCannons();
+					checkForCannons();
 					break;
 				case SPACE:
 					columbus.attack();
@@ -90,6 +92,7 @@ public class Explorer extends Application {
 				default:
 					break;
 				}
+//				checkForCannons();
 			}
 		});
 	}
@@ -116,21 +119,21 @@ public class Explorer extends Application {
 	}
 	
 	/**
-	 * Checks to see if there are any cannons at columbus' location
+	 * Checks to see if there are any cannons at Columbus' location
 	 */
 	@SuppressWarnings("unlikely-arg-type")
 	private void checkForCannons() {
 		if (Map.getGrid()[columbus.getLocation().x][columbus.getLocation().y] == 3) {
 			columbus = new ArmedShip(columbus);
-//			Cannon cannon = cannons.get(0);
 			for (Cannon cannon : cannons) {
 				System.out.println("IN for");
-				System.out.println("Cannon: " + cannon.toString() + " Columbus: " + columbus.getLocation().toString());
-				if (cannon.getLocation() == (columbus.getLocation())) {
+				System.out.println("Cannon: " + cannon.getLocation().toString() + " Columbus: " + columbus.getLocation().toString());
+				if (cannon.getLocation().toString().equals(columbus.getLocation().toString())) {
 					System.out.println("Removing...");
 					cannons.remove(cannon);
 					root.getChildren().remove(cannon);
 					System.out.println("Removed...");
+					break;
 				}
 			}
 		}

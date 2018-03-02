@@ -24,8 +24,8 @@ public abstract class Ship extends Observable {
 	 * @param map
 	 *            - the map this ship will navigate.
 	 */
-	public Ship() {
-		location = new Point(1, 1);
+	public Ship(int x, int y) {
+		location = new Point(x, y);
 		winningStatus = CONTINUE;
 	}
 
@@ -69,7 +69,7 @@ public abstract class Ship extends Observable {
 			imgv.setY(location.y * scale);
 			setChanged();
 			if(/*this instanceof Ship && this.lookForTreasure(p)*/Map.getGrid()[p.x][p.y] == 4){
-				this.setWinningStatus(WON);
+				setWinningStatus(WON);
 			}else{
 				notifyObservers();
 			}
@@ -80,7 +80,7 @@ public abstract class Ship extends Observable {
 	 * Moves 1 space East, if possible.
 	 */
 	public void goEast() {
-		if (location.getX() < BOUND) {
+		if (this.getLocation().getX() < BOUND) {
 			int x = ((int) location.getX()) + 1;
 			int y = ((int) location.getY());
 			moveTo(new Point(x, y));
@@ -91,7 +91,7 @@ public abstract class Ship extends Observable {
 	 * Moves 1 space West, if possible.
 	 */
 	public void goWest() {
-		if (location.getX() > 0) {
+		if (this.getLocation().getX() > 0) {
 			int x = ((int) location.getX()) - 1;
 			int y = ((int) location.getY());
 			moveTo(new Point(x, y));
@@ -102,7 +102,7 @@ public abstract class Ship extends Observable {
 	 * Moves 1 space North, if possible.
 	 */
 	public void goNorth() {
-		if (location.getY() > 0) {
+		if (this.getLocation().getY() > 0) {
 			int x = ((int) location.getX());
 			int y = ((int) location.getY()) - 1;
 			moveTo(new Point(x, y));
@@ -113,7 +113,7 @@ public abstract class Ship extends Observable {
 	 * Moves 1 space South, if possible.
 	 */
 	public void goSouth() {
-		if (location.getY() < BOUND) {
+		if (this.getLocation().getY() < BOUND) {
 			int x = ((int) location.getX());
 			int y = ((int) location.getY()) + 1;
 			moveTo(new Point(x, y));

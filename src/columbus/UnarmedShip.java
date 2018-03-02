@@ -6,8 +6,18 @@ package columbus;
  */
 public class UnarmedShip extends Ship{
 	
+	/**
+	 * Constructor that sets the initial position to (1,1)
+	 */
+	public UnarmedShip() {
+		super(1, 1);
+	}
+
+	/**
+	 * adds 0 to the ship's attack
+	 */
 	public int attack(){
-		System.out.println("Ship did not attack, no cannons attached!");
+		System.out.println("0");
 		return 0;
 	}
 }
