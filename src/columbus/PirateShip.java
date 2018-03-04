@@ -19,9 +19,7 @@ public class PirateShip extends UnarmedShip implements Observer{
 		super();
 		this.img = new Image("file:src/columbus/pirateShip.png", Map.SCALE, Map.SCALE, true, true);
 		this.imgv = new ImageView(img);
-		System.out.println("Set toObserve to: " + toObserve.toString());
-		this.toObserve = toObserve;
-		toObserve.addObserver(this);
+		setToObserve(toObserve);
 	}
 	
 	/** Moves this ship to a specified point, if possible
@@ -38,6 +36,12 @@ public class PirateShip extends UnarmedShip implements Observer{
 			imgv.setX(location.x * scale);
 			imgv.setY(location.y * scale);
 		}
+	}
+	
+	public void setToObserve(Ship toObserve) {
+		System.out.println("Set toObserve to: " + toObserve.toString());
+		this.toObserve = toObserve;
+		toObserve.addObserver(this);
 	}
 	
 	/** The overridden update method.

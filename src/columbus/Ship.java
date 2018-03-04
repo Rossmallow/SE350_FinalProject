@@ -51,6 +51,10 @@ public abstract class Ship extends Observable {
 		imgv.setY(location.y * scale);
 		return imgv;
 	}
+	
+	public void setImg(ImageView imgv) {
+		this.imgv = imgv;
+	}
 
 	//DAVID - Looking for Treasure
 	public boolean lookForTreasure(Point ship) {

@@ -26,6 +26,7 @@ public class Explorer extends Application {
 	private List<Cannon> cannons; // The cannons
 	private Treasure treasure; // The treasure
 //	private Stage stage; // The stage
+	private Scene scene; // The scene
 
 	/**
 	 * Overrides the start method to: -Set up the window. -Draw all the game
@@ -36,6 +37,7 @@ public class Explorer extends Application {
 		root = new AnchorPane();
 //		this.stage = stage;
 		Scene scene = new Scene(root, Map.SCALE * Map.SIZE, Map.SCALE * Map.SIZE);
+		this.scene = scene;
 		stage.setScene(scene);
 		stage.setTitle("Columbus Game");
 		initGame();
@@ -92,7 +94,6 @@ public class Explorer extends Application {
 				default:
 					break;
 				}
-//				checkForCannons();
 			}
 		});
 	}
@@ -123,23 +124,39 @@ public class Explorer extends Application {
 	 */
 	private void checkForCannons() {
 		if (Map.getGrid()[columbus.getLocation().x][columbus.getLocation().y] == 3) {
+			ImageView i = columbus.getImg(Map.SCALE);
 			columbus = new ArmedShip(columbus);
+			updateColumbus(i);
 			for (Cannon cannon : cannons) {
 				System.out.println("IN for");
 				System.out.println("Cannon: " + cannon.getLocation().toString() + " Columbus: " + columbus.getLocation().toString());
 				if (cannon.getLocation().equals(columbus.getLocation())) {
-					System.out.println("Removing...");
-					cannons.remove(cannon);
-					//root.getChildren().remove(cannon);
-					//DAVID
-					root.getChildren().remove(cannon.getImg(Map.SCALE));
-					System.out.println("Removed...");
+					removeCannon(cannon);
 					break;
 				}
 			}
 		}
 	}
-		
+	
+	/**
+	 * Removes a cannon from the cannons List and its ImageView from the root
+	 * @param cannon - the cannon to remove
+	 */
+	private void removeCannon(Cannon cannon) {
+		System.out.println("Removing...");
+		cannons.remove(cannon);
+		root.getChildren().remove(cannon.getImg(Map.SCALE));
+		System.out.println("Removed...");
+	}
+	
+	public void updateColumbus(ImageView oldImgv) {
+		root.getChildren().remove(oldImgv);
+		showShip(columbus);
+		for (PirateShip pirate: pirates) {
+			pirate.setToObserve(columbus);
+		}
+	}
+
 	/**
 	 * Displays a ship.
 	 * @param s - The ship to display.
@@ -205,8 +222,8 @@ public class Explorer extends Application {
 					pirates.add(p);
 				}
 				else if (Map.getGrid()[x][y] == 3) { // If the cell contains 3, give it a cannon
-					Cannon c = new Cannon(x, y);
-					cannons.add(c);
+//					Cannon c = new Cannon(x, y);
+					cannons.add(new Cannon(x, y));
 				}
 				//DAVID-Place treasure on Map
 				else if (Map.getGrid()[x][y] == 4) { // If the cell contains 3, give it a Treasure.
