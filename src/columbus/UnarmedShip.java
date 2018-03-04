@@ -1,4 +1,5 @@
 package columbus;
+
 /**
  * @author Ross Nelson
  *

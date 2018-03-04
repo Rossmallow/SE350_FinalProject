@@ -24,9 +24,10 @@ public class Explorer extends Application {
 	private Ship columbus = new UnarmedShip(); // Columbus' ship.
 	private List<PirateShip> pirates; // The pirate ships.
 	private List<Cannon> cannons; // The cannons
+	private List<ImageView> explosions; // The explosions
 	private Treasure treasure; // The treasure
 //	private Stage stage; // The stage
-	private Scene scene; // The scene
+//	private Scene scene; // The scene
 
 	/**
 	 * Overrides the start method to: -Set up the window. -Draw all the game
@@ -37,7 +38,7 @@ public class Explorer extends Application {
 		root = new AnchorPane();
 //		this.stage = stage;
 		Scene scene = new Scene(root, Map.SCALE * Map.SIZE, Map.SCALE * Map.SIZE);
-		this.scene = scene;
+//		this.scene = scene;
 		stage.setScene(scene);
 		stage.setTitle("Columbus Game");
 		initGame();
@@ -72,24 +73,34 @@ public class Explorer extends Application {
 					columbus.goEast();
 					checkGameStatus();
 					checkForCannons();
+					removeExplosions();
 					break;
 				case LEFT:
 					columbus.goWest();
 					checkGameStatus();
 					checkForCannons();
+					removeExplosions();
 					break;
 				case UP:
 					columbus.goNorth();
 					checkGameStatus();
 					checkForCannons();
+					removeExplosions();
 					break;
 				case DOWN:
 					columbus.goSouth();
 					checkGameStatus();
 					checkForCannons();
+					removeExplosions();
 					break;
 				case SPACE:
-					columbus.attack();
+					showExplosions(columbus.attack());
+//					try {
+//						TimeUnit.MILLISECONDS.sleep(100);
+//					} catch (InterruptedException e) {
+//						e.printStackTrace();
+//					}
+//					removeExplosions();
 					break;
 				default:
 					break;
@@ -149,6 +160,10 @@ public class Explorer extends Application {
 		System.out.println("Removed...");
 	}
 	
+	/**
+	 * Updates the ship that is drawn and that pirates follow
+	 * @param oldImgv
+	 */
 	public void updateColumbus(ImageView oldImgv) {
 		root.getChildren().remove(oldImgv);
 		showShip(columbus);
@@ -200,6 +215,62 @@ public class Explorer extends Application {
 			}
 		}
 	}
+	
+	/**
+	 * Instantiates all of the explosions
+	 * @param attack - power of attack (number of cannons collected)
+	 */
+	private void showExplosions(int attack) {
+		if (attack >= 1) {
+			showExplosions(new Explosion(columbus.getLocation().x + 1, columbus.getLocation().y));
+			showExplosions(new Explosion(columbus.getLocation().x - 1, columbus.getLocation().y));
+			showExplosions(new Explosion(columbus.getLocation().x, columbus.getLocation().y + 1));
+			showExplosions(new Explosion(columbus.getLocation().x, columbus.getLocation().y - 1));
+		}
+		if (attack >= 2) {
+			showExplosions(new Explosion(columbus.getLocation().x + 1, columbus.getLocation().y + 1));
+			showExplosions(new Explosion(columbus.getLocation().x - 1, columbus.getLocation().y - 1));
+			showExplosions(new Explosion(columbus.getLocation().x - 1, columbus.getLocation().y + 1));
+			showExplosions(new Explosion(columbus.getLocation().x + 1, columbus.getLocation().y - 1));
+		}
+		if (attack >= 3) {
+			showExplosions(new Explosion(columbus.getLocation().x + 2, columbus.getLocation().y));
+			showExplosions(new Explosion(columbus.getLocation().x - 2, columbus.getLocation().y));
+			showExplosions(new Explosion(columbus.getLocation().x, columbus.getLocation().y + 2));
+			showExplosions(new Explosion(columbus.getLocation().x, columbus.getLocation().y - 2));
+		}
+		checkForPirates(); // * UNIMPLEMENTED *
+	}
+	
+	/**
+	 * Adds the explosion's ImageView to the root
+	 * @param explosion - the explosion who to add
+	 */
+	private void showExplosions(Explosion explosion) {
+		if (explosion.getLocation().x >= 0 && explosion.getLocation().x <= Map.SIZE && explosion.getLocation().y >= 0 && explosion.getLocation().y <= Map.SIZE) {
+			ImageView i = explosion.getImg(Map.SCALE);
+			if (!root.getChildren().contains(i)) {
+				explosions.add(explosion.getImg(Map.SCALE));
+				root.getChildren().add(i);
+			}
+		}
+	}
+	
+	/**
+	 * UNIMPLEMENTED *
+	 */
+	private void checkForPirates() {
+	}
+	
+	/**
+	 * Removes all explosions from explosions if any exist
+	 */
+	private void removeExplosions() {
+		System.out.println("Removing Explosions...");
+		root.getChildren().removeAll(explosions);
+		explosions = new ArrayList<ImageView>();
+		System.out.println("Explosions Removed...");
+	}
 
 	/**
 	 * Draws the map.
@@ -208,6 +279,7 @@ public class Explorer extends Application {
 		Map.getInstance().makeAll();
 		pirates = new ArrayList<PirateShip>();
 		cannons = new ArrayList<Cannon>();
+		explosions = new ArrayList<ImageView>();
 		for (int x = 0; x < Map.SIZE; x++) {
 			for (int y = 0; y < Map.SIZE; y++) {
 				Rectangle rect = new Rectangle(x * Map.SCALE, y * Map.SCALE, Map.SCALE, Map.SCALE);
@@ -222,11 +294,10 @@ public class Explorer extends Application {
 					pirates.add(p);
 				}
 				else if (Map.getGrid()[x][y] == 3) { // If the cell contains 3, give it a cannon
-//					Cannon c = new Cannon(x, y);
 					cannons.add(new Cannon(x, y));
 				}
 				//DAVID-Place treasure on Map
-				else if (Map.getGrid()[x][y] == 4) { // If the cell contains 3, give it a Treasure.
+				else if (Map.getGrid()[x][y] == 4) { // If the cell contains 4, give it a Treasure.
 					treasure = new Treasure(new Point(x, y));
 					//To keep track of Treasure while Columbus is on Move
 					columbus.setTreasure(treasure);
