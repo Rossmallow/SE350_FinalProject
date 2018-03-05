@@ -37,7 +37,7 @@ public class Map {
 	}
 	
 	//DAVID - Initializing the Map - For reset purpose
-	public void initMap(){
+	public static void initMap(){
 		for(int y = 0; y < SIZE; y++) {
 			for(int x = 0; x < SIZE; x++) {
 				grid[x][y] = 0;
@@ -50,13 +50,13 @@ public class Map {
 	 * @param y - the cell's y-coordinate.
 	 * @param val - the value to set the cell to.
 	 */
-	public void set(int x, int y, int val) {
+	public static void set(int x, int y, int val) {
 		grid[x][y] = val;
 	}
 	
 	/** Makes islands and pirates on the map.
 	 */
-	public void makeAll() {
+	public static void makeAll() {
 		initMap();
 		makeIslands();
 		makePirates();
@@ -66,14 +66,14 @@ public class Map {
 	
 	/** Makes 2 pirates.
 	 */
-	public void makePirates() {
+	public static void makePirates() {
 		makePirates(2);
 	}
 	
 	/** Makes a specified number of pirates.
 	 * @param n - the number of pirates to make.
 	 */
-	public void makePirates(int n) {
+	public static void makePirates(int n) {
 		Random rand = new Random(System.currentTimeMillis());
 		for (int i = 0; i < n; i++) {
 			int randX = 0, randY = 0;
@@ -87,14 +87,14 @@ public class Map {
 	
 	/** Makes (SIZE^2)/10 islands.
 	 */
-	public void makeIslands() {
+	public static void makeIslands() {
 		makeIslands(SIZE * SIZE / 10);
 	}
 
 	/** Makes a specified number of islands.
 	 * @param n - the number of islands to make.
 	 */
-	public void makeIslands(int n) {
+	public static void makeIslands(int n) {
 		Random rand = new Random();
 		for (int i = 0; i < n; i++) {
 			grid[rand.nextInt(SIZE)][rand.nextInt(SIZE)] = 1;
@@ -104,10 +104,10 @@ public class Map {
 	/* DAVID
 	 * Using 4 - to specify the Treasure
 	 * */
-	public void makeTreasure(){
+	public static void makeTreasure(){
 		makeTreasure(1);
 	}
-	public void makeTreasure(int n){
+	public static void makeTreasure(int n){
 		Random rand = new Random();
 		for(int i=0;i<n;i++){
 			grid[rand.nextInt(SIZE)][rand.nextInt(SIZE)] = 4;
@@ -116,7 +116,7 @@ public class Map {
 	/**
 	 * Makes 4 cannons
 	 */
-	public void makeCannons() {
+	public static void makeCannons() {
 		makeCannons(4);
 	}
 	
@@ -124,7 +124,7 @@ public class Map {
 	 * Makes a n cannons
 	 * @param n - the number of cannons to make
 	 */
-	public void makeCannons(int n) {
+	public static void makeCannons(int n) {
 		Random rand = new Random(System.currentTimeMillis());
 		for (int i = 0; i < n; i++) {
 			int x = rand.nextInt(SIZE);
