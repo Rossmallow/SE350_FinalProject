@@ -1,7 +1,5 @@
 package columbus;
 
-import java.util.*;
-
 public class Map {
 	
 	private static int[][] grid;
