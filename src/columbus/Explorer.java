@@ -24,7 +24,7 @@ public class Explorer extends Application {
 	private Ship columbus = new UnarmedShip(); // Columbus' ship.
 	private List<PirateShip> pirates; // The pirate ships.
 	private List<Cannon> cannons; // The cannons
-	private List<ImageView> explosions; // The explosions
+	private List<Explosion> explosions; // The explosions
 	private Treasure treasure; // The treasure
 //	private Stage stage; // The stage
 //	private Scene scene; // The scene
@@ -94,13 +94,7 @@ public class Explorer extends Application {
 					removeExplosions();
 					break;
 				case SPACE:
-					showExplosions(columbus.attack());
-//					try {
-//						TimeUnit.MILLISECONDS.sleep(100);
-//					} catch (InterruptedException e) {
-//						e.printStackTrace();
-//					}
-//					removeExplosions();
+					columbusAttack();
 					break;
 				default:
 					break;
@@ -155,6 +149,7 @@ public class Explorer extends Application {
 	 */
 	private void removeCannon(Cannon cannon) {
 		System.out.println("Removing...");
+		Map.getGrid()[cannon.getLocation().x][cannon.getLocation().y] = 0;
 		cannons.remove(cannon);
 		root.getChildren().remove(cannon.getImg(Map.SCALE));
 		System.out.println("Removed...");
@@ -217,6 +212,14 @@ public class Explorer extends Application {
 	}
 	
 	/**
+	 * Calls methods that are required for an attack
+	 */
+	private void columbusAttack() {
+		showExplosions(columbus.attack()); // Draws the explosions
+		checkForPirates(); // Checks if pirates are in the explosions
+	}
+	
+	/**
 	 * Instantiates all of the explosions
 	 * @param attack - power of attack (number of cannons collected)
 	 */
@@ -239,7 +242,6 @@ public class Explorer extends Application {
 			showExplosions(new Explosion(columbus.getLocation().x, columbus.getLocation().y + 2));
 			showExplosions(new Explosion(columbus.getLocation().x, columbus.getLocation().y - 2));
 		}
-		checkForPirates(); // * UNIMPLEMENTED *
 	}
 	
 	/**
@@ -250,16 +252,37 @@ public class Explorer extends Application {
 		if (explosion.getLocation().x >= 0 && explosion.getLocation().x <= Map.SIZE && explosion.getLocation().y >= 0 && explosion.getLocation().y <= Map.SIZE) {
 			ImageView i = explosion.getImg(Map.SCALE);
 			if (!root.getChildren().contains(i)) {
-				explosions.add(explosion.getImg(Map.SCALE));
+				explosions.add(explosion);
 				root.getChildren().add(i);
+				Map.getGrid()[explosion.getLocation().x][explosion.getLocation().y] += 10; // Adds 10 to the current tile value to distinguish an explosion
 			}
 		}
 	}
 	
 	/**
-	 * UNIMPLEMENTED *
+	 * For each pirate, if the pirate is in an explosion, call delete.
 	 */
 	private void checkForPirates() {
+		List<PirateShip> toRemove = new ArrayList<PirateShip>(); // A list of pirates to delete
+		for (PirateShip pirate : pirates) {
+			if (Map.getGrid()[pirate.getLocation().x][pirate.getLocation().y] >= 10) {
+				toRemove.add(pirate); // Adds the pirate to a list to be removed later
+			}
+		}
+		for (PirateShip pirate : toRemove) {
+			removePirate(pirate); // Calls delete outside of the loop in the pirates list to avoid errors
+		}
+	}
+	
+	/**
+	 * Removes pirates by removing references
+	 * @param pirate - the pirate to remove
+	 */
+	private void removePirate(PirateShip pirate) {
+		pirate.setToObserve(null);
+		Map.getGrid()[pirate.location.x][pirate.location.y] = 0;
+		pirates.remove(pirate);
+		root.getChildren().remove(pirate.getImg(Map.SCALE));
 	}
 	
 	/**
@@ -267,8 +290,13 @@ public class Explorer extends Application {
 	 */
 	private void removeExplosions() {
 		System.out.println("Removing Explosions...");
-		root.getChildren().removeAll(explosions);
-		explosions = new ArrayList<ImageView>();
+		for (Explosion explosion : explosions) {
+			Map.getGrid()[explosion.getLocation().x][explosion.getLocation().y] -= 10;
+			root.getChildren().remove(explosion.getImg(Map.SCALE));
+			explosions = new ArrayList<Explosion>();
+		}
+//		root.getChildren().removeAll(explosions);
+//		explosions = new ArrayList<ImageView>();
 		System.out.println("Explosions Removed...");
 	}
 
@@ -279,7 +307,7 @@ public class Explorer extends Application {
 		Map.getInstance().makeAll();
 		pirates = new ArrayList<PirateShip>();
 		cannons = new ArrayList<Cannon>();
-		explosions = new ArrayList<ImageView>();
+		explosions = new ArrayList<Explosion>();
 		for (int x = 0; x < Map.SIZE; x++) {
 			for (int y = 0; y < Map.SIZE; y++) {
 				Rectangle rect = new Rectangle(x * Map.SCALE, y * Map.SCALE, Map.SCALE, Map.SCALE);
@@ -288,7 +316,8 @@ public class Explorer extends Application {
 					rect.setFill(Color.GREEN); // If the cell contains 1, it's an island.
 				else
 					rect.setFill(Color.PALETURQUOISE); // Else, it's water.
-				if (Map.getGrid()[x][y] == 2) { // If the cell contains 2, give it a pirate.
+				if (x == 1 && y == 1) {} // Makes sure not to instantiate anything on the place Columbus will spawn
+				else if (Map.getGrid()[x][y] == 2) { // If the cell contains 2, give it a pirate.
 					PirateShip p = new PirateShip(columbus);
 					p.moveTo(new Point(x, y));
 					pirates.add(p);

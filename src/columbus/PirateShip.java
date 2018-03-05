@@ -28,7 +28,7 @@ public class PirateShip extends UnarmedShip implements Observer{
 	@Override
 	public void moveTo(Point p) {
 		System.out.println("Pirate MoveTo called on pair: " + p.toString());
-		if(p.x >= 0 && p.x <= Map.SIZE && p.y >= 0 && p.y <= Map.SIZE && Map.getGrid()[p.x][p.y] % 2 == 0) {	//Pirate ships are allowed to "pass" each other.
+		if(p.x >= 0 && p.x <= Map.SIZE && p.y >= 0 && p.y <= Map.SIZE && Map.getGrid()[p.x][p.y] % 2 == 0 && Map.getGrid()[p.x][p.y] != 4) {	//Pirate ships are allowed to "pass" each other.
 			System.out.println("Moving pirate ship to: " + p.toString());
 			Map.getInstance().set(location.x, location.y, 0);	//Set the current location to be empty.
 			location = p;						
@@ -37,11 +37,15 @@ public class PirateShip extends UnarmedShip implements Observer{
 			imgv.setY(location.y * scale);
 		}
 	}
-	
+	/**
+	 * Sets a ship to observe
+	 * @param toObserve - the ship to observe
+	 */
 	public void setToObserve(Ship toObserve) {
-		System.out.println("Set toObserve to: " + toObserve.toString());
 		this.toObserve = toObserve;
-		toObserve.addObserver(this);
+		if (toObserve != null) {
+			toObserve.addObserver(this);
+		}
 	}
 	
 	/** The overridden update method.
