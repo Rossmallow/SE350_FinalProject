@@ -68,7 +68,7 @@ public class MapTest {
 	}
 
 	/**
-	 * Tests makeAll method 
+	 * Tests makeAll() method 
 	 * For this method, nothing is returned 
 	 * Tests the functionality of the method
 	 */
@@ -100,7 +100,7 @@ public class MapTest {
 	@Test
 	public void testMakeIslands() {
 		Map.makeIslands();
-		// assertTrue(Map.makeIslands() == 2);
+		// assertTrue(Map.makeIslands() == 1);
 	}
 	
 	/**
@@ -112,7 +112,7 @@ public class MapTest {
 	@Test
 	public void testMakeTreasure() {
 		Map.makeTreasure();
-		// assertTrue(Map.makeTreasure() == 2);
+		// assertTrue(Map.makeTreasure() == 4);
 	}
 	
 	/**
@@ -124,7 +124,7 @@ public class MapTest {
 	@Test
 	public void testMakeCannons() {
 		Map.makeCannons();
-		// assertTrue(Map.makeCannons() == 2);
+		// assertTrue(Map.makeCannons() == 4);
 	}
 
 }
