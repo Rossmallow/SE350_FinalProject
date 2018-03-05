@@ -1,7 +1,5 @@
 package columbus;
 
-import java.awt.Point;
-
 public class FollowStrategy implements PirateStrategy {
 
 	private PirateShip pirate;
@@ -23,22 +21,21 @@ public class FollowStrategy implements PirateStrategy {
 	 * @param s
 	 *            - the ship to chase.
 	 */
-
 	@Override
 	public void chase(Ship s)
 	{
-		Point p = s.getLocation();
-		Point q = pirate.getLocation();
-		if (p.x > q.x) {
-			pirate.goEast();
-		} else if (p.x < q.x) {
+		int x = pirate.getLocation().x - s.getLocation().x;
+		int y = pirate.getLocation().y - s.getLocation().y;
+		
+		if (x > 0 && Map.getGrid()[pirate.getLocation().x - 1][pirate.getLocation().y] == 0)
 			pirate.goWest();
-		} else if (p.y > q.y) {
-			pirate.goSouth();
-		} else if (p.y < q.y) {
+		else if (x < 0 && Map.getGrid()[pirate.getLocation().x + 1][pirate.getLocation().y] == 0)
+			pirate.goEast();
+		else if (y > 0 && Map.getGrid()[pirate.getLocation().x][pirate.getLocation().y - 1] == 0)
 			pirate.goNorth();
-		}
-		if(p.equals(pirate.getLocation()))
+		else if (y < 0 && Map.getGrid()[pirate.getLocation().x][pirate.getLocation().y + 1] == 0)
+			pirate.goSouth();
+		if(s.getLocation().equals(pirate.getLocation()))
 			s.setWinningStatus(Ship.LOST);
 	}
 
