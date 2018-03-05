@@ -37,6 +37,7 @@ public class PirateShip extends UnarmedShip implements Observer{
 			imgv.setY(location.y * scale);
 		}
 	}
+	
 	/**
 	 * Sets a ship to observe
 	 * @param toObserve - the ship to observe
