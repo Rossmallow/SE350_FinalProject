@@ -105,9 +105,14 @@ public class Explorer extends Application {
 	//DAVID - Checking Game status
 	public void checkGameStatus(){
 		//Check if Columbus won
-		if(columbus.getWinningStatus() == Ship.WON){
+		if(columbus.getWinningStatus() == Ship.WON && pirates.isEmpty()){
 			reset("Congratulations!!! You Won. Play again?");
-		} else if (columbus.getWinningStatus() == Ship.LOST) {
+		}
+		else if (columbus.getWinningStatus() == Ship.WON && !pirates.isEmpty()) {
+			columbus.setWinningStatus("CONTINUE");
+			createAlert("You must destroy " + pirates.size() + " more pirate(s).");
+		}
+		else if (columbus.getWinningStatus() == Ship.LOST) {
 			reset("Alas!!! You Lost. Play again?");
 		}
 	}
@@ -121,6 +126,20 @@ public class Explorer extends Application {
 			initGame();
 		}else if((result.isPresent()) && (result.get() == ButtonType.CANCEL)){
 			Platform.exit();
+		}
+	}
+	
+	/**
+	 * Makes an alert with a custom message and a single "OK" button that closes the window
+	 * @param message - the message to display
+	 */
+	public void createAlert(String message) {
+		Alert alert = new Alert(AlertType.CONFIRMATION);
+		alert.setTitle("Info");
+		alert.setContentText(message);
+		Optional<ButtonType> result = alert.showAndWait();
+		if ((result.isPresent()) && (result.get() == ButtonType.OK)) {
+			alert.close();
 		}
 	}
 	

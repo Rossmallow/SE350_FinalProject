@@ -1,7 +1,5 @@
 package columbus;
 
-import java.awt.Point;
-
 public class FollowStrategy implements PirateStrategy {
 
 	private PirateShip pirate;
@@ -23,7 +21,6 @@ public class FollowStrategy implements PirateStrategy {
 	 * @param s
 	 *            - the ship to chase.
 	 */
-
 	@Override
 	public void chase(Ship s)
 	{
