@@ -335,7 +335,8 @@ public class Explorer extends Application {
 					rect.setFill(Color.PALETURQUOISE); // Else, it's water.
 				if (x == 1 && y == 1) {} // Makes sure not to instantiate anything on the place Columbus will spawn
 				else if (Map.getGrid()[x][y] == 2) { // If the cell contains 2, give it a pirate.
-					PirateShip p = new PirateShip(columbus);
+					//PirateShip p = new PirateShip(columbus);
+					PirateShip p = PirateShipFactory.buildPirateShip(columbus, "follow");
 					p.moveTo(new Point(x, y));
 					pirates.add(p);
 				}
