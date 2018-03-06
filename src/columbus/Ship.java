@@ -63,7 +63,7 @@ public abstract class Ship extends Observable {
 	 * @param p - the point to move to.
 	 */
 	public void moveTo(Point p) {
-		if (p.x >= 0 && p.x <= BOUND && p.y >= 0 && p.y <= BOUND && (Map.getGrid()[p.x][p.y] == 10 || Map.getGrid()[p.x][p.y] != 1 && Map.getGrid()[p.x][p.y] != 2)) {
+		if (p.x >= 0 && p.x <= BOUND && p.y >= 0 && p.y <= BOUND && (Map.getGrid()[p.x][p.y] != 11 && Map.getGrid()[p.x][p.y] != 1 && Map.getGrid()[p.x][p.y] != 2)) {
 			location = p;
 			imgv.setX(location.x * scale);
 			imgv.setY(location.y * scale);

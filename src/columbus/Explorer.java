@@ -147,7 +147,7 @@ public class Explorer extends Application {
 	 * Checks to see if there are any cannons at Columbus' location
 	 */
 	private void checkForCannons() {
-		if (Map.getGrid()[columbus.getLocation().x][columbus.getLocation().y] == 3) {
+		if (Map.getGrid()[columbus.getLocation().x][columbus.getLocation().y] == 3 || Map.getGrid()[columbus.getLocation().x][columbus.getLocation().y] == 13) {
 			ImageView i = columbus.getImg(Map.SCALE);
 			columbus = new ArmedShip(columbus);
 			updateColumbus(i);
