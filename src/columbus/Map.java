@@ -1,5 +1,7 @@
 package columbus;
 
+import java.util.Random;
+
 public class Map {
 	
 	private static int[][] grid;

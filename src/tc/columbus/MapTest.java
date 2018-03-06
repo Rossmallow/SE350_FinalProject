@@ -1,8 +1,10 @@
-package columbus;
+package tc.columbus;
 
 import static org.junit.Assert.*;
 
 import org.junit.Test;
+
+import columbus.Map;
 
 /**
  * JUnit test for the singleton Map Class

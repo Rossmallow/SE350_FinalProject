@@ -268,7 +268,7 @@ public class Explorer extends Application {
 	 * @param explosion - the explosion who to add
 	 */
 	private void showExplosions(Explosion explosion) {
-		if (explosion.getLocation().x >= 0 && explosion.getLocation().x <= Map.SIZE && explosion.getLocation().y >= 0 && explosion.getLocation().y <= Map.SIZE) {
+		if (explosion.getLocation().x >= 0 && explosion.getLocation().x < Map.SIZE && explosion.getLocation().y >= 0 && explosion.getLocation().y < Map.SIZE) {
 			ImageView i = explosion.getImg(Map.SCALE);
 			if (!root.getChildren().contains(i)) {
 				explosions.add(explosion);
