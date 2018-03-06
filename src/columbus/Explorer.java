@@ -152,8 +152,7 @@ public class Explorer extends Application {
 			columbus = new ArmedShip(columbus);
 			updateColumbus(i);
 			for (Cannon cannon : cannons) {
-				System.out.println("IN for");
-				System.out.println("Cannon: " + cannon.getLocation().toString() + " Columbus: " + columbus.getLocation().toString());
+//				System.out.println("Cannon: " + cannon.getLocation().toString() + " Columbus: " + columbus.getLocation().toString());
 				if (cannon.getLocation().equals(columbus.getLocation())) {
 					removeCannon(cannon);
 					break;
@@ -167,11 +166,11 @@ public class Explorer extends Application {
 	 * @param cannon - the cannon to remove
 	 */
 	private void removeCannon(Cannon cannon) {
-		System.out.println("Removing...");
+//		System.out.println("Removing...");
 		Map.getGrid()[cannon.getLocation().x][cannon.getLocation().y] = 0;
 		cannons.remove(cannon);
 		root.getChildren().remove(cannon.getImg(Map.SCALE));
-		System.out.println("Removed...");
+//		System.out.println("Removed...");
 	}
 	
 	/**
@@ -308,22 +307,21 @@ public class Explorer extends Application {
 	 * Removes all explosions from explosions if any exist
 	 */
 	private void removeExplosions() {
-		System.out.println("Removing Explosions...");
+//		System.out.println("Removing Explosions...");
 		for (Explosion explosion : explosions) {
 			Map.getGrid()[explosion.getLocation().x][explosion.getLocation().y] -= 10;
 			root.getChildren().remove(explosion.getImg(Map.SCALE));
 			explosions = new ArrayList<Explosion>();
 		}
-//		root.getChildren().removeAll(explosions);
-//		explosions = new ArrayList<ImageView>();
-		System.out.println("Explosions Removed...");
+//		System.out.println("Explosions Removed...");
 	}
 
 	/**
 	 * Draws the map.
 	 */
 	private void drawMap() {
-		Map.getInstance().makeAll();
+		Map.getInstance();
+		Map.makeAll();
 		pirates = new ArrayList<PirateShip>();
 		cannons = new ArrayList<Cannon>();
 		explosions = new ArrayList<Explosion>();
