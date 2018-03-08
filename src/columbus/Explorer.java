@@ -336,7 +336,12 @@ public class Explorer extends Application {
 				if (x == 1 && y == 1) {} // Makes sure not to instantiate anything on the place Columbus will spawn
 				else if (Map.getGrid()[x][y] == 2) { // If the cell contains 2, give it a pirate.
 					//PirateShip p = new PirateShip(columbus);
-					PirateShip p = PirateShipFactory.buildPirateShip(columbus, "follow");
+					PirateShip p;
+					if (pirates.size() == 1) {
+						p = PirateShipFactory.buildPirateShip(columbus, "follow");
+					} else {
+						p = PirateShipFactory.buildPirateShip(columbus, "horizontal");
+					}
 					p.moveTo(new Point(x, y));
 					pirates.add(p);
 				}

@@ -5,6 +5,7 @@ import java.awt.Point;
 public class HorizontalStrategy implements PirateStrategy {
 
 	private PirateShip pirate;
+	private String direction = "";
  
 	/**
 	 * A constructor.
@@ -24,20 +25,26 @@ public class HorizontalStrategy implements PirateStrategy {
 	 */
 
 	@Override
-	public void chase(Ship s) {
-
-		Point p = s.getLocation();
-		Point q = pirate.getLocation(); 
-
-		Point[] chaser = new Point[10];
-
-		int i = 0;
-		for (int y = 0; y < 10; y++) {
-			if (s.check(q.x, q.y) && i < 10) {
-				chaser[i] = new Point(p.x, p.y);
-				i++;
-
-			}
+	public void chase(Ship s) {	
+		int x = pirate.getLocation().x;
+		
+		if (direction == "WEST" && x - 1 >= 0 && Map.getGrid()[pirate.getLocation().x - 1][pirate.getLocation().y] == 0) {
+			pirate.goWest();
+//			System.out.println("GOING WEST 1");
+		}
+		else if (direction == "EAST" && x + 1 < Map.SIZE && Map.getGrid()[pirate.getLocation().x + 1][pirate.getLocation().y] == 0) {
+			pirate.goEast();
+//			System.out.println("GOING EAST 1");
+		}
+		else if (direction == "" || (x + 1 >= Map.SIZE || Map.getGrid()[pirate.getLocation().x + 1][pirate.getLocation().y] != 0)) {
+			direction = "WEST";
+			pirate.goWest();
+//			System.out.println("GOING WEST 2");
+		}
+		else if (direction == "" || (x - 1 < 0 || Map.getGrid()[pirate.getLocation().x - 1][pirate.getLocation().y] != 0)) {
+			direction = "EAST";
+			pirate.goEast();
+//			System.out.println("GOING EAST 2");
 		}
 	}
 }
