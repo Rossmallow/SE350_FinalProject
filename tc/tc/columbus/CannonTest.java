@@ -1,8 +1,6 @@
 package tc.columbus;
 import org.junit.Test;
 
-import columbus.Cannon;
-
 /**
  * JUnit test for the Cannon Class
  */

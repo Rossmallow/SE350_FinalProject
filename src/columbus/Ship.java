@@ -54,7 +54,8 @@ public abstract class Ship extends Observable {
 
 	//DAVID - Looking for Treasure
 	public boolean lookForTreasure(Point ship) {
-		if (ship.equals(this.getTreasure().getLocation()))
+		this.getTreasure();
+		if (ship.equals(Treasure.getLocation()))
 			return true;
 		return false;
 	}

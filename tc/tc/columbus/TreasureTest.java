@@ -1,12 +1,7 @@
 package tc.columbus;
 
 import static org.junit.Assert.*;
-
 import org.junit.Test;
-
-import com.sun.javafx.scene.paint.GradientUtils.Point;
-
-import columbus.Map;
 import columbus.Treasure;
 
 public class TreasureTest {

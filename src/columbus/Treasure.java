@@ -20,7 +20,7 @@ public class Treasure {
 	}
 	
 	public static ImageView getImg(int scale) {
-		scale = scale;
+//		scale = scale;
 		imgv.setX(location.x * scale);
 		imgv.setY(location.y * scale);
 		return imgv;
@@ -30,7 +30,7 @@ public class Treasure {
 		return location;
 	}
 	public static void setLocation(Point location) {
-		location = location;
+//		location = location;
 	}
 	
 	public static void moveTo(Point p) {

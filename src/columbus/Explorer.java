@@ -211,7 +211,7 @@ public class Explorer extends Application {
 	 * @param treasure - the treasure to display
 	 */
 	private void showTreasure(){
-		ImageView i = treasure.getImg(Map.SCALE);
+		ImageView i = Treasure.getImg(Map.SCALE);
 		if(!root.getChildren().contains(i))
 			root.getChildren().add(i);
 	}
