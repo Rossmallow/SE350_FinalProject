@@ -1,7 +1,5 @@
 package columbus;
 
-import java.awt.Point;
-
 public class HorizontalStrategy implements PirateStrategy {
 
 	private PirateShip pirate;

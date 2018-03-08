@@ -64,10 +64,10 @@ public class Map {
 		makeCannons();
 	}
 	
-	/** Makes 2 pirates.
+	/** Makes 3 pirates.
 	 */
 	public static void makePirates() {
-		makePirates(2);
+		makePirates(3);
 	}
 	
 	/** Makes a specified number of pirates.
