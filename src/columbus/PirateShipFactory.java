@@ -8,8 +8,8 @@ public class PirateShipFactory {
 		}
 		else if(strategy.equals("horizontal")){
 			pirateShip.setPirateStrategy(new HorizontalStrategy(pirateShip));
-		}else if(strategy.equals("none")){
-			//Assigning None Strategy for the Pirate Ship
+		}else if(strategy.equals("vertical")){
+			pirateShip.setPirateStrategy(new VerticalStrategy(pirateShip));
 		}
 		return pirateShip;
 	}

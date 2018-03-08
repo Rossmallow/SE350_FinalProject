@@ -26,6 +26,8 @@ public class Explorer extends Application {
 	private List<Cannon> cannons; // The cannons
 	private List<Explosion> explosions; // The explosions
 	private Treasure treasure; // The treasure
+	private List<String> pirateStrategies;
+	private int pirateStrategyCount = 0;
 //	private Stage stage; // The stage
 //	private Scene scene; // The scene
 
@@ -51,6 +53,7 @@ public class Explorer extends Application {
 	 */
 	public void initGame(){
 		columbus = new UnarmedShip();
+		makePirateStrategies();
 		drawMap();
 		showCannons();
 		showTreasure();
@@ -316,6 +319,17 @@ public class Explorer extends Application {
 //		System.out.println("Explosions Removed...");
 	}
 
+	/*
+	 * Setting up Pirate strategies that are to be followed by Pirate Ships
+	 * */
+	private void makePirateStrategies(){
+		pirateStrategies = new ArrayList<String>();
+		pirateStrategyCount = 0;
+		pirateStrategies.add("follow");
+		pirateStrategies.add("horizontal");
+		pirateStrategies.add("vertical");
+	}
+	
 	/**
 	 * Draws the map.
 	 */
@@ -337,13 +351,11 @@ public class Explorer extends Application {
 				else if (Map.getGrid()[x][y] == 2) { // If the cell contains 2, give it a pirate.
 					//PirateShip p = new PirateShip(columbus);
 					PirateShip p;
-					if (pirates.size() == 1) {
-						p = PirateShipFactory.buildPirateShip(columbus, "follow");
-					} else {
-						p = PirateShipFactory.buildPirateShip(columbus, "horizontal");
+					if(pirateStrategyCount < pirateStrategies.size()){
+						p = PirateShipFactory.buildPirateShip(columbus, pirateStrategies.get(pirateStrategyCount++));
+						p.moveTo(new Point(x, y));
+						pirates.add(p);
 					}
-					p.moveTo(new Point(x, y));
-					pirates.add(p);
 				}
 				else if (Map.getGrid()[x][y] == 3) { // If the cell contains 3, give it a cannon
 					cannons.add(new Cannon(x, y));
