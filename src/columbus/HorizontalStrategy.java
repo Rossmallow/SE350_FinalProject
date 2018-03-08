@@ -46,5 +46,7 @@ public class HorizontalStrategy implements PirateStrategy {
 			pirate.goEast();
 //			System.out.println("GOING EAST 2");
 		}
+		if(s.getLocation().equals(pirate.getLocation()))
+			s.setWinningStatus(Ship.LOST);
 	}
 }
