@@ -23,7 +23,7 @@ public class ArmedShip extends AttackDecorator{
 	 */
 	public int attack() {
 		attack = ship.attack() + 1;
-		System.out.println(attack);
+//		System.out.println(attack);
 		return attack;
 	}
 }

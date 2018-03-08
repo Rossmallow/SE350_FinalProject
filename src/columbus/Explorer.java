@@ -204,7 +204,7 @@ public class Explorer extends Application {
 	 */
 	private void showPirates() {
 		for (PirateShip p : pirates) {
-			System.out.println("Showing ship : " + p.toString());
+//			System.out.println("Showing ship : " + p.toString());
 			showShip(p);
 		}
 	}

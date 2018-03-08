@@ -28,21 +28,21 @@ public class HorizontalStrategy implements PirateStrategy {
 		
 		if (direction == "WEST" && x - 1 >= 0 && Map.getGrid()[pirate.getLocation().x - 1][pirate.getLocation().y] == 0) {
 			pirate.goWest();
-			System.out.println("GOING WEST 1");
+//			System.out.println("GOING WEST 1");
 		}
 		else if (direction == "EAST" && x + 1 < Map.SIZE && Map.getGrid()[pirate.getLocation().x + 1][pirate.getLocation().y] == 0) {
 			pirate.goEast();
-			System.out.println("GOING EAST 1");
+//			System.out.println("GOING EAST 1");
 		}
 		else if (direction == "" || (x + 1 >= Map.SIZE || Map.getGrid()[pirate.getLocation().x + 1][pirate.getLocation().y] != 0)) {
 			direction = "WEST";
 			pirate.goWest();
-			System.out.println("GOING WEST 2");
+//			System.out.println("GOING WEST 2");
 		}
 		else if (direction == "" || (x - 1 < 0 || Map.getGrid()[pirate.getLocation().x - 1][pirate.getLocation().y] != 0)) {
 			direction = "EAST";
 			pirate.goEast();
-			System.out.println("GOING EAST 2");
+//			System.out.println("GOING EAST 2");
 		}
 		if(s.getLocation().equals(pirate.getLocation()))
 			s.setWinningStatus(Ship.LOST);

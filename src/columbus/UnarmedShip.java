@@ -18,7 +18,7 @@ public class UnarmedShip extends Ship{
 	 * adds 0 to the ship's attack
 	 */
 	public int attack(){
-		System.out.println("0");
+//		System.out.println("0");
 		return 0;
 	}
 }

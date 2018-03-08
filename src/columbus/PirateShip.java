@@ -27,9 +27,9 @@ public class PirateShip extends UnarmedShip implements Observer{
 	 */
 	@Override
 	public void moveTo(Point p) {
-		System.out.println("Pirate MoveTo called on pair: " + p.toString());
+//		System.out.println("Pirate MoveTo called on pair: " + p.toString());
 		if(p.x >= 0 && p.x <= Map.SIZE && p.y >= 0 && p.y <= Map.SIZE && Map.getGrid()[p.x][p.y] % 2 == 0 && Map.getGrid()[p.x][p.y] != 4) {	//Pirate ships are allowed to "pass" each other.
-			System.out.println("Moving pirate ship to: " + p.toString());
+//			System.out.println("Moving pirate ship to: " + p.toString());
 			Map.getInstance();
 			Map.set(location.x, location.y, 0);	//Set the current location to be empty.
 			location = p;						

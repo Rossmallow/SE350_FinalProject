@@ -28,21 +28,21 @@ public class VerticalStrategy implements PirateStrategy {
 		
 		if (direction == "NORTH" && y - 1 >= 0 && Map.getGrid()[pirate.getLocation().x][pirate.getLocation().y - 1] == 0) {
 			pirate.goNorth();
-			System.out.println("GOING NORTH 1");
+//			System.out.println("GOING NORTH 1");
 		}
 		else if (direction == "SOUTH" && y + 1 < Map.SIZE && Map.getGrid()[pirate.getLocation().x][pirate.getLocation().y + 1] == 0) {
 			pirate.goSouth();
-			System.out.println("GOING SOUTH 1");
+//			System.out.println("GOING SOUTH 1");
 		}
 		else if (direction == "" || (y + 1 >= Map.SIZE || Map.getGrid()[pirate.getLocation().x][pirate.getLocation().y + 1] != 0)) {
 			direction = "NORTH";
 			pirate.goNorth();
-			System.out.println("GOING NORTH 2");
+//			System.out.println("GOING NORTH 2");
 		}
 		else if (direction == "" || (y - 1 < 0 || Map.getGrid()[pirate.getLocation().x][pirate.getLocation().y - 1] != 0)) {
 			direction = "SOUTH";
 			pirate.goSouth();
-			System.out.println("GOING SOUTH 2");
+//			System.out.println("GOING SOUTH 2");
 		}
 		if(s.getLocation().equals(pirate.getLocation()))
 			s.setWinningStatus(Ship.LOST);
