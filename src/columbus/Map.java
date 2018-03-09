@@ -2,7 +2,7 @@ package columbus;
 
 import java.util.Random;
 
-public class Map {
+public class Map { 
 	
 	private static int[][] grid;
 	public static final int SIZE = 20;
