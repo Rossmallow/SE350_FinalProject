@@ -24,6 +24,7 @@ public class Treasure {
 		imgv.setX(location.x * scale);
 		imgv.setY(location.y * scale);
 		return imgv;
+		
 	}
 
 	public static Point getLocation() {

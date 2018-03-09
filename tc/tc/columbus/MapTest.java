@@ -122,7 +122,7 @@ public class MapTest {
 	@Test
 	public void testMakeTreasure() {
 		Map.makeTreasure();
-		assertTrue(Map.makeTreasure() == 4);
+		assertTrue(Map.makeTreasure() == 4); 
 	}
 	
 	/**
