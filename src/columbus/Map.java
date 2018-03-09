@@ -37,12 +37,16 @@ public class Map {
 	}
 	
 	//DAVID - Initializing the Map - For reset purpose
-	public static void initMap(){
+	public static int initMap(){
 		for(int y = 0; y < SIZE; y++) {
 			for(int x = 0; x < SIZE; x++) {
 				grid[x][y] = 0;
 			}
 		}
+		
+		//For JUnit testing purposes 
+		
+		return 0;
 	}
 	
 	/** Sets a cell of the map to a specified value.
@@ -50,24 +54,35 @@ public class Map {
 	 * @param y - the cell's y-coordinate.
 	 * @param val - the value to set the cell to.
 	 */
-	public static void set(int x, int y, int val) {
+	public static int set(int x, int y, int val) {
 		grid[x][y] = val;
+		return val;
 	}
 	
 	/** Makes islands and pirates on the map.
+	 * @return 
 	 */
-	public static void makeAll() {
+	public static int makeAll() {
 		initMap();
 		makeIslands();
 		makePirates();
 		makeTreasure();
 		makeCannons();
+		
+		//For JUnit testing purposes 
+
+		return 0;
 	}
 	
 	/** Makes 3 pirates.
+	 * @return 
 	 */
-	public static void makePirates() {
+	public static int makePirates() {
 		makePirates(3);
+		
+		//For JUnit testing purposes 
+
+		return 3;
 	}
 	
 	/** Makes a specified number of pirates.
@@ -86,9 +101,14 @@ public class Map {
 	}
 	
 	/** Makes (SIZE^2)/10 islands.
+	 * @return 
 	 */
-	public static void makeIslands() {
+	public static int makeIslands() {
 		makeIslands(SIZE * SIZE / 10);
+		
+		//For JUnit testing purposes 
+
+		return 0;
 	}
 
 	/** Makes a specified number of islands.
@@ -104,20 +124,33 @@ public class Map {
 	/* DAVID
 	 * Using 4 - to specify the Treasure
 	 * */
-	public static void makeTreasure(){
+	public static int makeTreasure(){
 		makeTreasure(1);
+		
+		//For JUnit testing purposes 
+
+		return 4;
 	}
-	public static void makeTreasure(int n){
+	public static int makeTreasure(int n){
 		Random rand = new Random();
 		for(int i=0;i<n;i++){
 			grid[rand.nextInt(SIZE)][rand.nextInt(SIZE)] = 4;
 		}
+		
+		//For JUnit testing purposes 
+
+		return 4;
 	}
 	/**
 	 * Makes 4 cannons
+	 * @return 
 	 */
-	public static void makeCannons() {
+	public static int makeCannons() {
 		makeCannons(4);
+		
+		//For JUnit testing purposes 
+
+		return 4;
 	}
 	
 	/**

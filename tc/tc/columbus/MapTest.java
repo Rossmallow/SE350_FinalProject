@@ -13,8 +13,8 @@ import columbus.Map;
 public class MapTest {
 
 	/**
-	 * Tests getInstance() method Ensures that the method is not null and that
-	 * an instance is returned
+	 * Tests getInstance() method 
+	 * Ensures that the method is not null and that an instance is returned
 	 */
 
 	@Test
@@ -24,8 +24,8 @@ public class MapTest {
 	}
 
 	/**
-	 * Tests getInstance() method, again Checks the singleton Map class for
-	 * equality
+	 * Tests getInstance() method, again 
+	 * Checks the singleton Map class for equality
 	 */
 
 	@Test
@@ -37,8 +37,8 @@ public class MapTest {
 	}
 
 	/**
-	 * Tests getGrid() method Ensures that the method is not null and that a
-	 * grid is returned
+	 * Tests getGrid() method 
+	 * Ensures that the method is not null and that a grid is returned
 	 */
 
 	@Test
@@ -48,85 +48,93 @@ public class MapTest {
 	}
 
 	/**
-	 * Tests initMap() method For this method, nothing is returned Tests the
-	 * functionality of the method
+	 * Tests initMap() method For this method
+	 * Makes sure that the return value is correct in the class 
+	 * Tests the functionality of the method
 	 */
 
 	@Test
 	public void testInitMap() {
 		Map.initMap();
+		assertTrue(Map.initMap() == 0);
+
 
 	}
 
 	/**
 	 * Tests set() method 
-	 * For this method, nothing is returned 
+	 * Makes sure that the return value is correct in the class 
 	 * Tests the functionality of the method
 	 */
 	@Test
 	public void testSet() {
-		Map.set(2, 2, 0);
+		Map.set(0, 0, 0);
+		assertTrue(Map.set(0, 0, 0) == (0));
+
 
 	}
 
 	/**
 	 * Tests makeAll() method 
-	 * For this method, nothing is returned 
+	 * Makes sure that the return value is correct in the class 
 	 * Tests the functionality of the method
 	 */
 
 	@Test
 	public void testMakeAll() {
 		Map.makeAll();
+		assertTrue(Map.makeAll() == 0);
+
 	}
 
 
 	/**
 	 * Tests makePirates() method 
-	 * For this method, nothing is returned 
+	 * Makes sure that the return value is correct in the class 
 	 * Tests the functionality of the method
 	 */
 	
 	@Test
 	public void testMakePirates() {
 		Map.makePirates();
+		assertTrue(Map.makePirates() == 3);
 
 	}
 	
 	/**
 	 * Tests makeIslands() method 
-	 * For this method, nothing is returned 
+	 * Makes sure that the return value is correct in the class 
 	 * Tests the functionality of the method
 	 */
 
 	@Test
 	public void testMakeIslands() {
 		Map.makeIslands();
-		// assertTrue(Map.makeIslands() == 1);
+		assertTrue(Map.makeIslands() == 0);
 	}
 	
 	/**
 	 * Tests makeTreasure() method 
-	 * For this method, nothing is returned 
+	 * Makes sure that the return value is correct in the class 
 	 * Tests the functionality of the method
 	 */
 
 	@Test
 	public void testMakeTreasure() {
 		Map.makeTreasure();
-		// assertTrue(Map.makeTreasure() == 4);
+		assertTrue(Map.makeTreasure() == 4);
 	}
 	
 	/**
 	 * Tests makeCannons() method 
-	 * For this method, nothing is returned 
+	 * Makes sure that the return value is correct in the class 
 	 * Tests the functionality of the method
 	 */
 
 	@Test
 	public void testMakeCannons() {
 		Map.makeCannons();
-		// assertTrue(Map.makeCannons() == 4);
+		assertTrue(Map.makeCannons() == 4);
 	}
 
 }
