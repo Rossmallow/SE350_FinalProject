@@ -2,17 +2,16 @@ package tc.columbus;
 
 import static org.junit.Assert.*;
 import org.junit.Test;
+
+import columbus.Map;
 import columbus.Treasure;
 
 public class TreasureTest {
 
-	@Test
-	public void Treasure() {
-		
-	}
 	
 	@Test
 	public void getImg() {
+
 		
 	}
 

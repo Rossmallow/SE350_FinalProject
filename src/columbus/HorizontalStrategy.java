@@ -6,7 +6,7 @@ public class HorizontalStrategy implements PirateStrategy {
 	private String direction = "";
  
 	/**
-	 * A constructor.
+	 * 	 * A constructor.
 	 * 
 	 * @param s - the ship this strategy is assigned to. 
 	 */
