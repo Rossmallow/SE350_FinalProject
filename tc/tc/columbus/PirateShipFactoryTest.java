@@ -45,7 +45,7 @@ public class PirateShipFactoryTest {
 	/**
 	 * Tests the buildPirateShip() method for a Horizontal instance 
 	 * Ensures that the method is not null and that an instance is returned
-	 */
+	 */ 
 	
 	@Test
 	public void buildTestHorizontal() {

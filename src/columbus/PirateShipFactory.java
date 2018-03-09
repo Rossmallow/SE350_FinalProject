@@ -1,5 +1,5 @@
 package columbus;
-
+ 
 public class PirateShipFactory {
 	public static PirateShip buildPirateShip(Ship toObserve, String strategy) {
 		PirateShip pirateShip = new PirateShip(toObserve);
